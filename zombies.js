@@ -38,11 +38,12 @@ function Weapon(name, damage) {
 
 }
 
-Weapon.prototype =
-Object.create(Item.prototype, {
+Weapon.prototype = Object.create(Item.prototype, {
+
   constructor : {
     value : Weapon
   }
+
 });
 
 
@@ -68,6 +69,22 @@ Object.create(Item.prototype, {
  * @param {number} energy     The energy the food provides.
  * @property {number} energy
  */
+
+function Food(name, energy) {
+
+  Item.call(this, name);
+
+  this.energy = energy;
+
+}
+
+Food.prototype = Object.create(Item.prototype, {
+
+  constructor : {
+    value : Food
+  }
+
+});
 
 
 /**
