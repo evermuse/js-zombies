@@ -126,9 +126,21 @@ function Player(name, health, strength, speed) {
   this.equipped = false;
 
   this._pack = [];
-  this._maxhealth = health;
+  this._maxHealth = health;
 
 }
+
+Player.prototype.getPack = function() {
+
+  return this._pack;
+
+};
+
+Player.prototype.getMaxHealth = function() {
+
+  return this._maxHealth;
+
+};
 
 /**
  * Player Class Method => checkPack()
@@ -141,6 +153,7 @@ function Player(name, health, strength, speed) {
  *
  * @name checkPack
  */
+
 
 
 /**
