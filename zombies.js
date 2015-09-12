@@ -154,7 +154,11 @@ Player.prototype.getMaxHealth = function() {
  * @name checkPack
  */
 
+Player.prototype.checkPack = function() {
 
+  console.log();
+
+};
 
 /**
  * Player Class Method => takeItem(item)
@@ -174,6 +178,20 @@ Player.prototype.getMaxHealth = function() {
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
 
+Player.prototype.takeItem = function(item) {
+
+  if (this.getPack().length < 3) {
+
+    this._pack.push(item);
+
+  } else {
+
+    console.log('Sorry, pack is full');
+    return false;
+
+  }
+
+};
 
 /**
  * Player Class Method => discardItem(item)
@@ -201,6 +219,24 @@ Player.prototype.getMaxHealth = function() {
  * @return {boolean} true/false     Whether player was able to remove item from pack.
  */
 
+Player.prototype.discardItem = function(item) {
+
+  var itemIndex = this.getPack().indexOf(item);
+
+  if (itemIndex) {
+
+    this._pack.splice(itemIndex, 1);
+    console.log(this.player + '\'s ' + item + ' was successfully discarded');
+    return true;
+
+  } else {
+
+    console.log('Sorry, ' + item + ' was not discarded, since the item could not be found');
+    return false;
+
+  }
+
+};
 
 /**
  * Player Class Method => equip(itemToEquip)
