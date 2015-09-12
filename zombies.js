@@ -258,6 +258,42 @@ Player.prototype.discardItem = function(item) {
  * @param {Weapon} itemToEquip  The weapon item to equip.
  */
 
+Player.prototype.equip = function(itemToEquip) {
+
+  debugger;
+
+  var itemIndex = this.getPack().indexOf(itemToEquip);
+
+  if (itemIndex !== -1) {
+
+    if (itemToEquip instanceof Weapon) {
+
+      if (this.equipped) {
+
+        this._pack.splice(itemIndex, 1);
+        this.takeItem(this.equipped);
+        this.equipped = itemToEquip;
+
+      } else {
+
+        this._pack.splice(itemIndex, 1);
+        this.equipped = itemToEquip;
+
+      }
+
+    } else {
+
+      return false;
+
+    }
+
+  } else {
+
+    return false;
+
+  }
+
+};
 
 /**
  * Player Class Method => eat(itemToEat)
