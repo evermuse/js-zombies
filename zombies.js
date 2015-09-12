@@ -156,7 +156,7 @@ Player.prototype.getMaxHealth = function() {
 
 Player.prototype.checkPack = function() {
 
-  console.log();
+  console.log(this.player + '\'s pack contains: ' + this.getPack());
 
 };
 
