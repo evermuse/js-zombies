@@ -503,7 +503,15 @@ function StrongZombie(health, strength, speed) {
  * -----------------------------
  */
 
+StrongZombie.prototype = Object.create(Zombie.prototype, {
 
+  constructor : {
+
+    value : StrongZombie
+
+  }
+
+});
 
 
 /**
