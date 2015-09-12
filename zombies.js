@@ -223,10 +223,17 @@ Player.prototype.discardItem = function(item) {
 
   var itemIndex = this.getPack().indexOf(item);
 
-  if (itemIndex) {
+  if (itemIndex !== -1) {
 
     this._pack.splice(itemIndex, 1);
     console.log(this.player + '\'s ' + item + ' was successfully discarded');
+
+    if (this.equipped === item) {
+
+      this.equipped = false;
+
+    }
+
     return true;
 
   } else {
@@ -259,8 +266,6 @@ Player.prototype.discardItem = function(item) {
  */
 
 Player.prototype.equip = function(itemToEquip) {
-
-  debugger;
 
   var itemIndex = this.getPack().indexOf(itemToEquip);
 
@@ -314,6 +319,36 @@ Player.prototype.equip = function(itemToEquip) {
  * @param {Food} itemToEat  The food item to eat.
  */
 
+Player.prototype.eat = function(itemToEat) {
+
+  var itemIndex = this.getPack().indexOf(itemToEat);
+
+  if (itemIndex !== -1) {
+
+    if (itemToEat instanceof Food) {
+
+      this._pack.splice(itemIndex, 1);
+      this.health += itemToEat.energy;
+
+      if (this.health > this.getMaxHealth()) {
+
+        this.health = this._maxHealth;
+
+      }
+
+    } else {
+
+      return false;
+
+    }
+
+  } else {
+
+    return false;
+
+  }
+
+};
 
 /**
  * Player Class Method => useItem(item)
@@ -328,6 +363,19 @@ Player.prototype.equip = function(itemToEquip) {
  * @param {Item/Weapon/Food} item   The item to use.
  */
 
+Player.prototype.useItem = function(item) {
+
+  if (item instanceof Weapon) {
+
+    this.equip(item);
+
+  } else if (item instanceof Food) {
+
+    this.eat(item);
+
+  }
+
+};
 
 /**
  * Player Class Method => equippedWith()
@@ -342,6 +390,24 @@ Player.prototype.equip = function(itemToEquip) {
  * @name equippedWith
  * @return {string/boolean}   Weapon name or false if nothing is equipped.
  */
+
+Player.prototype.equippedWith = function() {
+
+  //debugger;
+
+  if (this.equipped) {
+
+    console.log(this.name + ' is equipped with ' + this.equipped.name);
+    return this.equipped.name;
+
+  } else {
+
+    console.log(this.name + ' is not equipped with anything');
+    return false;
+
+  }
+
+};
 
 
 /**
@@ -359,6 +425,18 @@ Player.prototype.equip = function(itemToEquip) {
  * @property {number} speed
  * @property {boolean} isAlive      Default value should be `true`.
  */
+
+function Zombie(health, strength, speed) {
+
+  this.health = health;
+  this.strength = strength;
+  this.speed = speed;
+
+  this._maxHealth = health;
+
+  this.isAlive = true;
+
+}
 
 
 /**
